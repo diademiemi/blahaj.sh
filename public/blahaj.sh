@@ -1,5 +1,5 @@
 #!/bin/bash
-export SITE_URL=http://blahaj.sh
+export SITE_URL=https://blahaj.sh
 if [[ $TRANS == "RIGHTS" ]]; then BLUE="\033[0'30m\033[0'44m" PINK="\033[0'30m\033[0'45m" WHIT="\033[0'30m\033[0'47m"; printf "\033[0'30m\033[0'30m"; fi
 printf "${BLUE}                                                                                                                                                        \033[0m\n"
 printf "${BLUE}                                                                                  WX0kdc::l0                                                            \033[0m\n"
