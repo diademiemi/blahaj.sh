@@ -1,6 +1,4 @@
-#!/bin/bash
-export SITE_URL=https://blahaj.sh
-if [[ $TRANS == "RIGHTS" ]]; then BLUE="\033[0'30m\033[0'44m" PINK="\033[0'30m\033[0'45m" WHIT="\033[0'30m\033[0'47m"; printf "\033[0'30m\033[0'30m"; fi
+if [ "$TRANS" = "RIGHTS" ]; then BLUE="\033[48;2;91;206;250m\033[0'30m" PINK="\033[48;2;245;169;184m\033[0'30m" WHIT="\033[48;2;255;255;255m\033[0'30m"; fi
 printf "${BLUE}                                                                                                                                                        \033[0m\n"
 printf "${BLUE}                                                                                  WX0kdc::l0                                                            \033[0m\n"
 printf "${BLUE}                                                                               WXOxl:,''',c0                                                            \033[0m\n"
@@ -42,54 +40,25 @@ printf "${BLUE}                                                                 
 printf "${BLUE}                                                                        WNKkdol:,...................'oNW                                                \033[0m\n"
 printf "${BLUE}                                                                            WWWNXOkxdlc:;,,'...',;clkN                                                  \033[0m\n"
 printf "${BLUE}                                                                                                                                                        \033[0m\n"
-printf "\033[0m"
+unset BLUE PINK WHIT
+export RESET="\033[0m"
+export SITE_URL=http://localhost:8080
+printf "${RESET}"
 
-printf "\nAvailable scripts:\n"
+printf "\nAvailable Options:\n\n"
 
-# Create pipe for bash to communicate with parent with
-exec 5>&1
+printf "1) Shell aliases/functions\n\n"
+printf "2) Bookmarks\n\n"
 
-# I want to use a bash script for this
-# But running this script with bash will declare all functions in scope to it's process only.
-# So I have it pipe the names of the scripts to sh, which sources it. Sourcing doesn't fork.
-script=$(bash -c '
-scripts[1]="vagrant.sh: Vagrant related aliases and functions"
-scripts[2]="kubectl.sh: Kubectl related aliases and functions"
-scripts[3]="tools.sh: Useful functions and aliases"
-scripts[4]="kde.sh: Functions and aliases for use with KDE software"
+printf "\nEnter your choice: "
+read choice
 
-for key in ${!scripts[@]}; do
-    printf "($key)  ${scripts[$key]}\n">&5
-done
-
-if [ -z "$1" ]; then
-    printf "\nPlease select script(s) to run: " >&5
-    read -r input
-    selection=($(echo "$input" | tr "," "\n"))
+if [ "$choice" = "1a" ]; then
+    source <(curl -s ${SITE_URL}/aliases/all.sh )
+elif [ "$choice" = "1" ]; then
+    source <(curl -s ${SITE_URL}/aliases/index.sh )
+elif [ "$choice" = "2" ]; then
+    source <(curl -s ${SITE_URL}/bookmarks.sh )
 else
-
-    selection=($(echo "${@:1}" | tr "," "\n"))
+    printf "\n\nInvalid choice.\n"
 fi
-
-for key in ${!scripts[@]}; do
-    for i in ${selection[@]}; do
-        if [[ $i == $key ]] || [[ $selection == ${scripts[$key]} ]]; then
-            script=$(echo ${scripts[$key]} | egrep -o "^[^:]+")
-            echo "Running $script" >&5
-            echo "${SITE_URL}/${script}"
-        elif [[ $i == "all" ]]; then
-            for key in ${!scripts[@]}; do
-                script=$(echo ${scripts[$key]} | egrep -o "^[^:]+")
-                echo "Running $script" >&5
-                echo "${SITE_URL}/${script}"
-            done
-            exit 0
-        fi
-    done
-done
-')
-
-# Source the scripts
-for line in $(echo $script | sed 's/\n/ /'); do
-    source <(curl -s $line)
-done

@@ -4,7 +4,7 @@
 # Usage:
 # split-konsole "ssh host1" "ssh host2"
 
-function split-konsole () {
+function splitkonsole () {
   # The builtin variables don't seem to be accurate and don't give the MainWindow
   export CURRENT_KONSOLE_SESSION=$(qdbus $KONSOLE_DBUS_SERVICE | grep -o '/Sessions/.*' | sort | tail -n1 | egrep -o "[0-9]+")
   export CURRENT_KONSOLE_WINDOW=$(qdbus $KONSOLE_DBUS_SERVICE | grep -o '/konsole/MainWindow_[0-9]\+$' | sort | tail -n1)
