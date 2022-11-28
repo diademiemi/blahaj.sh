@@ -4,6 +4,9 @@ alias genpasswd="python -c 'import crypt,getpass; print(crypt.crypt(getpass.getp
 # Get public IP
 alias getip="curl ifconfig.me"
 
+# Clean podman environment
+alias podman-clean="podman stop -a && podman rm -a && yes | podman volume prune"
+
 ## Convenience
 
 # Create a directory and enter it
