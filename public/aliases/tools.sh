@@ -11,7 +11,7 @@ alias podman-clean="podman stop -a && podman rm -a && yes | podman volume prune"
 alias pvpn="protonvpn-cli"
 
 # yt-dlp
-alias yt-dlp-flac="yt-dlp --extract-audio --audio-format=flac"
+alias yt-dlp-flac="yt-dlp --audio-quality 0 --extract-audio --audio-format flac --embed-subs --add-metadata --embed-thumbnail"
 
 
 ## Convenience
