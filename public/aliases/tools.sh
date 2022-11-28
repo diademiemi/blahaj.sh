@@ -7,6 +7,13 @@ alias getip="curl ifconfig.me"
 # Clean podman environment
 alias podman-clean="podman stop -a && podman rm -a && yes | podman volume prune"
 
+# ProtonVPN
+alias pvpn="protonvpn-cli"
+
+# yt-dlp
+alias yt-dlp-flac="yt-dlp --extract-audio --audio-format=flac"
+
+
 ## Convenience
 
 # Create a directory and enter it
