@@ -42,7 +42,7 @@ printf "${BLUE}                                                                 
 printf "${BLUE}                                                                                                                                                        \033[0m\n"
 unset BLUE PINK WHIT
 export RESET="\033[0m"
-export SITE_URL=http://localhost:8080
+export SITE_URL=https://blahaj.sh
 printf "${RESET}"
 
 printf "\nAvailable Options:\n\n"
