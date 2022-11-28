@@ -14,3 +14,4 @@ alias vde="vagrant destroy -f"
 alias vha="vagrant halt"
 alias vssh="vagrant ssh-config" # Get SSH config
 alias vsshc="vssh | sshc" # Get SSH config and use it to replace ~/.ssh/config
+alias vredo="vagrant destroy -f && vagrant up && vagrant ssh-config | sshc" # Redo environment
