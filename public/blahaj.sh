@@ -1,3 +1,5 @@
+# $SHELL <(wget -qO- blahaj.sh)
+# Don't run shell scripts without checking them first, read everything before you run it! I am not responsible for any damage caused by running this script.
 if [ "$TRANS" = "RIGHTS" ]; then BLUE="\033[48;2;91;206;250m\033[0'30m" PINK="\033[48;2;245;169;184m\033[0'30m" WHIT="\033[48;2;255;255;255m\033[0'30m"; fi
 printf "${BLUE}                                                                                                                                                        \033[0m\n"
 printf "${BLUE}                                                                                  WX0kdc::l0                                                            \033[0m\n"

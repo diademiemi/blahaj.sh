@@ -1,8 +1,5 @@
 # Generate password hash
-alias genpasswd="python -c 'import crypt,getpass; print(crypt.crypt(getpass.getpass(), crypt.mksalt(crypt.METHOD_SHA512)))'"
-
-# Get public IP
-alias getip="curl ifconfig.me"
+alias genpasswd="python3 -c 'import crypt,getpass; print(crypt.crypt(getpass.getpass(), crypt.mksalt(crypt.METHOD_SHA512)))'"
 
 # Clean podman environment
 alias podman-clean="podman stop -a && podman rm -a && yes | podman volume prune"
@@ -51,4 +48,21 @@ function  sshb ()
     printf "\033[0;34mRunning on \033[0;31m${host}\033[0m\n";
     ssh -q -t $host "$1";
   done
+}
+
+pre-commit-recursive ()
+{
+  action=$1
+  path=$2
+  if [[ -z "$action" ]]; then
+    echo "No action provided"
+    echo "Example: pre-commit-recursive install"
+    return 1
+  fi
+
+  if [[ -z "$path" ]]; then
+    path="."
+  fi
+
+  find $path -name ".pre-commit-config.yaml" -exec printf "\nRunning pre-commit $action at" \; -exec dirname {} \; -execdir pre-commit $action \;
 }
