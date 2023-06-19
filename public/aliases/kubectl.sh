@@ -45,6 +45,8 @@ ksec () {
             return 1
         fi
 
+        echo "Found $secret_name in namespace $namespace"
+
         if [[ ! -z $key ]]; then
             echo "Trying to find $key in $secret_name"
             kubectl get secret -n $namespace $secret_name -ojsonpath="{.data['$key']}" | base64 -d
@@ -60,6 +62,8 @@ ksec () {
             echo "No secret found"
             return 1
         fi
+
+        echo "Found $secret_name"
 
         if [[ ! -z $key ]]; then
             echo "Trying to find $key in $secret_name"
@@ -115,6 +119,8 @@ kx () {
             return 1
         fi
 
+        echo "Executing $command in $pod_name in namespace $namespace"
+
         kubectl exec -n $namespace -it $pod_name -- $command
     else
         echo "Trying to find $pod in current namespace"
@@ -124,6 +130,8 @@ kx () {
             echo "No pod found"
             return 1
         fi
+
+        echo "Executing $command in $pod_name"
 
         kubectl exec -it $pod_name -- $command
     fi
@@ -177,6 +185,8 @@ kfw () {
             return 1
         fi
 
+        echo "Forwarding $type/$svc_name in namespace $namespace to $ports"
+
         kubectl port-forward -n $namespace $type/$svc_name $ports
     else
         echo "Trying to find $svc in current namespace"
@@ -186,6 +196,8 @@ kfw () {
             echo "No svc found"
             return 1
         fi
+
+        echo "Forwarding $type/$svc_name to $ports"
 
         kubectl port-forward $type/$svc_name $ports
     fi
