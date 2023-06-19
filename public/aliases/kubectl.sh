@@ -20,9 +20,7 @@ ksec () {
     ## Example:
     # ksec -n argocd argocd-initial
 
-    unset namespace
-    unset key
-
+    local OPTIND n k
     while getopts ":n:k:" opt; do
         case $opt in
             n) namespace=$OPTARG;;
@@ -87,8 +85,7 @@ kx () {
     ## Example:
     # kx -n argocd repo-server
 
-    unset namespace
-
+    local OPTIND n
     while getopts ":n:" opt; do
         case $opt in
             n) namespace=$OPTARG;;
@@ -145,9 +142,7 @@ kfw () {
     ## Example:
     # kfw -n argocd argocd-server 8080:443
     
-    unset namespace
-    unset type
-
+    local OPTIND n t
     while getopts ":n:t:" opt; do
         case $opt in
             n) namespace=$OPTARG;;
