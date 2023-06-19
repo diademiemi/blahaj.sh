@@ -1,6 +1,6 @@
 alias k="kubectl"
 alias kg="kubectl get"
-alias kgall=kubectl get --all-namespaces all
+alias kgall="kubectl get --all-namespaces all"
 alias kd="kubectl describe"
 alias kl="kubectl logs"
 
