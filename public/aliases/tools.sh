@@ -53,16 +53,16 @@ function  sshb ()
 pre-commit-recursive ()
 {
   action=$1
-  path=$2
+  dir=$2
   if [[ -z "$action" ]]; then
     echo "No action provided"
     echo "Example: pre-commit-recursive install"
     return 1
   fi
 
-  if [[ -z "$path" ]]; then
-    path="."
+  if [[ -z "$dir" ]]; then
+    dir="."
   fi
 
-  find $path -name ".pre-commit-config.yaml" -exec printf "\nRunning pre-commit $action at" \; -exec dirname {} \; -execdir pre-commit $action \;
+  find $dir -name ".pre-commit-config.yaml" -exec printf "\nRunning pre-commit $action at" \; -exec dirname {} \; -execdir pre-commit $action \;
 }
